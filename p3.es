@@ -6,7 +6,7 @@
 	input(n);
 	for(i=0;i<n;i++){
 		input(nr);
-		nr+=s;
+		s+=nr;
 	}
 	output(s);
 
