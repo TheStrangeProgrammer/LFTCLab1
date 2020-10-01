@@ -4,7 +4,7 @@
 	a=0;
 	b=0;
 	c=0;
-	$sum=0;//$ not allowed
+	$$$=0;//$ not allowed
 	input(a);
 	input(b);
 	input(c);
