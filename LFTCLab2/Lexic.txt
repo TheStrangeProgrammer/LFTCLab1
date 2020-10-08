@@ -42,9 +42,9 @@ character
 
 string
 
-    STRING:="""CHARARRAY"""
+    STRING="""CHARARRAY"""
 
-    CHARARRAY:={CHARACTER}
+    CHARARRAY={CHARACTER}
 
     CHARACTER = (LETTER|DIGIT)
 	  
