@@ -24,8 +24,7 @@ Separators
 }  
 : 
 ; 
-space 
-tab
+space
 
 Operators
 + 
