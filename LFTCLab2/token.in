@@ -1,0 +1,47 @@
+Identifiers
+0 identifier
+
+Constants
+1 integer
+2 character
+3 string
+4 boolean
+
+Reserved words (keywords) 
+let 
+if 
+else-if 
+else 
+input 
+output 
+while
+for
+
+Separators
+[ 
+] 
+{ 
+}  
+: 
+; 
+space 
+tab
+
+Operators
++ 
+- 
+* 
+/ 
+% 
+= 
+< 
+<= 
+== 
+>= 
+!= 
+! 
++= 
+-= 
+*= 
+/= 
+%=
