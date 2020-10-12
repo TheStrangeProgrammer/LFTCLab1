@@ -1,13 +1,9 @@
-Identifiers
+
 0 identifier
 
-Constants
-1 integer
-2 character
-3 string
-4 boolean
 
-Reserved words (keywords) 
+1 constants
+
 let 
 if 
 else-if 
@@ -17,7 +13,7 @@ output
 while
 for
 
-Separators
+
 [ 
 ] 
 { 
@@ -26,7 +22,6 @@ Separators
 ; 
 space
 
-Operators
 + 
 - 
 * 
