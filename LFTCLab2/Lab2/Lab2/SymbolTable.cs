@@ -25,10 +25,11 @@ namespace Lab2
        
         
         /// <summary>
-        /// 
+        /// Hash function
+        /// takes a string and returns an int
         /// </summary>
         /// <param name="Key"></param>
-        /// <returns></returns>
+        /// <returns>index</returns>
         private int HashFunction(string Key)
         {
             int index = 79;
@@ -41,10 +42,10 @@ namespace Lab2
             return index % tableSize;
         }
         /// <summary>
-        /// 
+        /// Inserts a Key in the ST
         /// </summary>
         /// <param name="Key"></param>
-        /// <param name="Value"></param>
+        /// <returns>position of the token in hashtable KeyValuePair<int, int></returns>
         public KeyValuePair<int, int> Insert(string Key)
         {
             int index = HashFunction(Key);
@@ -72,10 +73,10 @@ namespace Lab2
             return new KeyValuePair<int, int>(index, i);
         }
         /// <summary>
-        /// 
+        /// Searches the token in symbol table ST
         /// </summary>
         /// <param name="Key"></param>
-        /// <returns></returns>
+        /// <returns>true if Key is in ST,false otherwise</returns>
         public bool Lookup(string Key)
         {
             int index = HashFunction(Key);
@@ -91,6 +92,13 @@ namespace Lab2
             return false;
         }
 
+        /// <summary>
+        /// Searches the token in symbol table ST
+        /// if found then returns position
+        /// if not found insert in ST and return position
+        /// </summary>
+        /// <param name="Key"></param>
+        /// <returns>position of the token in hashtable KeyValuePair<int, int></returns>
         public KeyValuePair<int, int> Position(string Key) {
             int index = HashFunction(Key);
             Node node = list[index];
