@@ -16,7 +16,7 @@ Lexic:
 
 - reserved words:
 
-    let if else-if else input output while
+    let if else-if else input output while for
 
       b.identifiers
 
@@ -24,7 +24,7 @@ Lexic:
 
     IDENTIFIER = LETTER {(LETTER|DIGIT)}
 
-    LETTER = "A" | "B" | . ..| "Z"
+    LETTER = "A" | "B" | . ..| "Z" | "a" | ... | "z"
 
     DIGIT = "0" | "1" |...| "9"
 
@@ -46,9 +46,9 @@ string
 
     CHARARRAY={CHARACTER}
 
-    CHARACTER = (LETTER|DIGIT)
+    CHARACTER = LETTER|DIGIT
 	  
 boolean
 	
-	BOOLEAN = ("true"|"false")
+	BOOLEAN = "true"|"false"
 	  
