@@ -1,0 +1,7 @@
+D:\faculta\s1\Limbaje formale si tehnici de compilare\LFTCLab1\LFTCLab3\LFTCLab3\LFTCLab3\bin\Debug\LFTCLab3.exe.config
+D:\faculta\s1\Limbaje formale si tehnici de compilare\LFTCLab1\LFTCLab3\LFTCLab3\LFTCLab3\bin\Debug\LFTCLab3.exe
+D:\faculta\s1\Limbaje formale si tehnici de compilare\LFTCLab1\LFTCLab3\LFTCLab3\LFTCLab3\bin\Debug\LFTCLab3.pdb
+D:\faculta\s1\Limbaje formale si tehnici de compilare\LFTCLab1\LFTCLab3\LFTCLab3\LFTCLab3\obj\Debug\LFTCLab3.csprojAssemblyReference.cache
+D:\faculta\s1\Limbaje formale si tehnici de compilare\LFTCLab1\LFTCLab3\LFTCLab3\LFTCLab3\obj\Debug\LFTCLab3.csproj.CoreCompileInputs.cache
+D:\faculta\s1\Limbaje formale si tehnici de compilare\LFTCLab1\LFTCLab3\LFTCLab3\LFTCLab3\obj\Debug\LFTCLab3.exe
+D:\faculta\s1\Limbaje formale si tehnici de compilare\LFTCLab1\LFTCLab3\LFTCLab3\LFTCLab3\obj\Debug\LFTCLab3.pdb
