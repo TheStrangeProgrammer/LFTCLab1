@@ -1,4 +1,7 @@
-﻿using System;
+//the insert and the position methods could be merged into a single method that checks if a key is in the symbol table and in case it finds the key, it returns the position,
+//otherwise it adds the key to the corresponding location
+
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -48,7 +51,8 @@ namespace Lab2
         /// <returns>position of the token in hashtable KeyValuePair<int, int></returns>
         public KeyValuePair<int, int> Insert(string Key)
         {
-            int index = HashFunction(Key);
+            int index = HashFunction(Key); //by combining the insert and position methods, you avoid doing some computations twice, like computing the hash value 
+                                            //and checking for the key inside the linked lists
             Node node = list[index];
 
             if (node == null)
@@ -58,8 +62,7 @@ namespace Lab2
             }
 
             if (node.Key == Key)
-                throw new Exception("Can't use same key!");
-            int i = 0;
+                throw new Exception("Can't use same key!"); 
             while (node.Next != null)
             {
                 node = node.Next;
@@ -77,7 +80,7 @@ namespace Lab2
         /// </summary>
         /// <param name="Key"></param>
         /// <returns>true if Key is in ST,false otherwise</returns>
-        public bool Lookup(string Key)
+        public bool Lookup(string Key)  //this method is not really necessary
         {
             int index = HashFunction(Key);
             Node node = list[index];
