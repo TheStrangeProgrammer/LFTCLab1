@@ -13,7 +13,7 @@
 		output(b);
 	}
 	else{
-		output(c);
+		output(a);
 	}
 
 }

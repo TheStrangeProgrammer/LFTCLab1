@@ -23,6 +23,6 @@
 		output("prime");
 	}
 	else{
-		output("not prime");
+		output("notprime");
 	}
 }

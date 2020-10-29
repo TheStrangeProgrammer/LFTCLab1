@@ -14,34 +14,79 @@ namespace LFTCLab3
 {
     class Program
     {
+        
         static SymbolTable symbolTable = new SymbolTable();
         static ProgramInternalForm programInternalForm = new ProgramInternalForm();
-        static string fileToReadPath = "D:\\faculta\\s1\\Limbaje formale si tehnici de compilare\\LFTCLab1\\LFTCLab1a\\p1.es";
-        static Regex identifiers = new Regex("/^[a-zA-Z_][a-zA-Z0-9_]*$/");
-        static Regex stringConstant = new Regex("");
-        static Regex integerConstant = new Regex(@"[-+]?\b\d+\b");
-        static Regex booleanConstant = new Regex(@"\b(true|false)\b");
-        static Regex reservedWords = new Regex(@"\b(if|else|for|let)\b");
-        static Regex operators = new Regex(@"\b(\+|\-|\=|\<)\b");
+        static string fileToReadPath = "D:\\faculta\\s1\\Limbaje formale si tehnici de compilare\\LFTCLab1\\LFTCLab1a\\p1err.es";
+        static Regex identifiers = new Regex(@"(\b([a-zA-Z_]+)\b)");
+        static Regex stringConstant = new Regex("\"(.*?)\"");
+        static Regex integerConstant = new Regex(@"\b([+-]?[1-9][0-9]*|0)\b");
+        static Regex booleanConstant = new Regex(@"(true|false)");
+        static Regex reservedWords = new Regex(@"(let|if|elseif|else|input|output|while|for)");
+        static Regex operators = new Regex(@"(\+|\*|-|\/|%|==|<=|>=|=|<|>|\|\||&&|!)");
         static Regex commentsMultiline = new Regex(@"/\*.*?\*/");
-        static Regex commentsSimple = new Regex(@"//.*$");
-        static Regex separators1 = new Regex(@"\b( |\n|\t)\b");
-        static Regex separators2  = new Regex(@"\b(\(|\)|\[|\]|\{|\})\b");
+        static Regex commentsSimple = new Regex(@"//.*$", RegexOptions.Multiline);
+        static Regex separators1 = new Regex(@"(\s+|\n+|\t+|\r+|;|,)");
+        static Regex separators2  = new Regex(@"(\(|\)|\[|\]|{|})");
         static void Main(string[] args)
         {
             ReadFile();
-            File.WriteAllText("PIF.out", programInternalForm.ToString());
-            File.WriteAllText("ST.out", symbolTable.ToString());
+            File.WriteAllText(@"D:\faculta\s1\Limbaje formale si tehnici de compilare\LFTCLab1\LFTCLab3\LFTCLab3\LFTCLab3\PIF.out", programInternalForm.ToString());
+            File.WriteAllText(@"D:\faculta\s1\Limbaje formale si tehnici de compilare\LFTCLab1\LFTCLab3\LFTCLab3\LFTCLab3\ST.out", symbolTable.ToString());
             Thread.Sleep(5000);
         }
-        
+        static string[] Tokenize(string[] tokens,Regex regex)
+        {
+            List<string> matches = new List<string>();
+            foreach (string token in tokens) {
+                string[] processedTokens = regex.Split(token);
+                foreach (string processedToken in processedTokens) {
+                    matches.Add(processedToken);
+                }
+            }
+
+            return matches.ToArray();
+
+        }
         /// <summary>
         /// 
         /// </summary>
         static void ReadFile() { 
             string textRead = File.ReadAllText(fileToReadPath);
-            string[] matches = separators1.Split(textRead);
-            foreach (string match in matches)
+            string[] tokens;
+            tokens= Regex.Split(textRead, commentsMultiline.ToString());
+            tokens= Tokenize(tokens, commentsSimple);
+            tokens = Tokenize(tokens, separators1);
+            tokens = Tokenize(tokens, separators2);
+            tokens = Tokenize(tokens, operators);
+            tokens = Tokenize(tokens, reservedWords);
+            tokens = Tokenize(tokens, booleanConstant);
+            tokens = Tokenize(tokens, integerConstant);
+            tokens = Tokenize(tokens, stringConstant);
+            tokens = Tokenize(tokens, identifiers);
+            int i = 1;
+            foreach (string token in tokens)
+            {
+
+                if (isEndline(token)) i++;
+                if (isReservedWord(token) || isOperator(token) || isSeparator(token))
+                {
+                    programInternalForm.Add(token, new KeyValuePair<int, int>(0, 0));
+                }
+                else if (isIdentifier(token) || isConstant(token))
+                {
+                    KeyValuePair<int, int> index = symbolTable.Position(token);
+                    programInternalForm.Add(token, index);
+                }
+                else if (token != "")
+                {
+                    Console.WriteLine("Lexical Error at line " + i);
+                }
+
+
+            }
+            // IEnumerable<string> tokens = separators1.Split(textRead).ToList().Select(match=> separators2.Split(match));
+            /*foreach (string match in matches)
             {
                 string[] processedMatches = separators2.Split(match);
                 foreach (string processedMatch in processedMatches)
@@ -57,7 +102,7 @@ namespace LFTCLab3
                         KeyValuePair<int,int> index = symbolTable.Position(processedMatch);
                         programInternalForm.Add(processedMatch, index);
                     }
-                    else
+                    else if(processedMatch!="")
                     {
                         Console.WriteLine("Lexical Error");
                     }
@@ -65,8 +110,14 @@ namespace LFTCLab3
 
                 }
 
-            }
+            }*/
         }
+
+        private static bool isEndline(string token)
+        {
+            return Regex.IsMatch(token, "\n");
+        }
+
         /// <summary>
         /// 
         /// </summary>

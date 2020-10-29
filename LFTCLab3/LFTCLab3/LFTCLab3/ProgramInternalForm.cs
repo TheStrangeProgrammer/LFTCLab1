@@ -22,9 +22,15 @@ namespace LFTCLab3
 
             list.Add(new KeyValuePair<string, KeyValuePair<int, int>>(key, value));
         }
+        
         public override string ToString()
         {
-            return base.ToString();
+            string toPrint = "";
+            foreach (KeyValuePair < string, KeyValuePair<int, int>> item in list)
+            {
+                toPrint += item.Key+" " +item.Value.Key+ "\n";
+            }
+            return toPrint;
         }
     }
 }

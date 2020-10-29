@@ -128,17 +128,26 @@ namespace LFTCLab3
         public override string ToString()
         {
             string toPrint = "";
+            int i = 0,j=0;
             foreach (Node node in list)
             {
                 if (node != null) {
-                    toPrint += node.Key + "\n";
+                    toPrint += node.Key+" "+ i+" "+j + "\n";
                     Node nextNode = node.Next;
-                    while (nextNode != null)
+                    if (nextNode != null)
                     {
-                        nextNode = nextNode.Next;
-                        toPrint += nextNode.Key + "\n";
+                        toPrint += nextNode.Key + " " + i + " " + j + "\n";
+                        j++;
+                        while (nextNode.Next != null)
+                        {
+                            
+                            nextNode = nextNode.Next;
+                            toPrint += nextNode.Key + " " + i + " " + j + "\n";
+                            j++;
+                        }
                     }
                 }
+                i++;
             }
             return toPrint;
         }
