@@ -18,7 +18,7 @@ namespace LFTCLab3
         static SymbolTable symbolTable = new SymbolTable();
         static ProgramInternalForm programInternalForm = new ProgramInternalForm();
         static string fileToReadPath = "D:\\faculta\\s1\\Limbaje formale si tehnici de compilare\\LFTCLab1\\LFTCLab1a\\p1err.es";
-        static Regex identifiers = new Regex(@"(\b([a-zA-Z_]+)\b)");
+        static Regex identifiers = new Regex(@"\b([a-zA-Z_]+)\b");
         static Regex stringConstant = new Regex("\"(.*?)\"");
         static Regex integerConstant = new Regex(@"\b([+-]?[1-9][0-9]*|0)\b");
         static Regex booleanConstant = new Regex(@"(true|false)");
