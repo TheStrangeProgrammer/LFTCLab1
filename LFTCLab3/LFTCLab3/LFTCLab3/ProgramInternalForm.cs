@@ -13,11 +13,7 @@ namespace LFTCLab3
         {
 
         }
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <param name="key"></param>
-        /// <param name="value"></param>
+
         public void Add(string key, KeyValuePair<int, int> value) {
 
             list.Add(new KeyValuePair<string, KeyValuePair<int, int>>(key, value));
