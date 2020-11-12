@@ -35,6 +35,12 @@ namespace LFTCLab3
             File.WriteAllText(@"D:\faculta\s1\Limbaje formale si tehnici de compilare\LFTCLab1\LFTCLab3\LFTCLab3\LFTCLab3\ST.out", symbolTable.ToString());
             Thread.Sleep(5000);
         }
+        /// <summary>
+        /// Takes an array of tokens and splits them by the regex given
+        /// </summary>
+        /// <param name="tokens"></param>
+        /// <param name="regex"></param>
+        /// <returns>Returns an array of tokens</returns>
         static string[] Tokenize(string[] tokens,Regex regex)
         {
             List<string> matches = new List<string>();
@@ -49,7 +55,7 @@ namespace LFTCLab3
 
         }
         /// <summary>
-        /// 
+        /// Reads file and produces the PIF and ST
         /// </summary>
         static void ReadFile() { 
             string textRead = File.ReadAllText(fileToReadPath);
@@ -112,61 +118,65 @@ namespace LFTCLab3
 
             }*/
         }
-
+        /// <summary>
+        /// Checks if the token is a newline
+        /// </summary>
+        /// <param name="token"></param>
+        /// <returns>true or false</returns>
         private static bool isEndline(string token)
         {
             return Regex.IsMatch(token, "\n");
         }
 
         /// <summary>
-        /// 
+        /// Checks if the token is a newline
         /// </summary>
         /// <param name="token"></param>
-        /// <returns></returns>
+        /// <returns>true or false</returns>
         static bool isConstant(string token)
         {
             return stringConstant.Match(token).Success||integerConstant.Match(token).Success || booleanConstant.Match(token).Success;
         }
         /// <summary>
-        /// 
+        /// Checks if the token is an identifier
         /// </summary>
         /// <param name="token"></param>
-        /// <returns></returns>
+        /// <returns>true or false</returns>
         static bool isIdentifier(string token)
         {
             return identifiers.Match(token).Success;
         }
         /// <summary>
-        /// 
+        /// Checks if the token is a reserved word
         /// </summary>
         /// <param name="token"></param>
-        /// <returns></returns>
+        /// <returns>true or false</returns>
         static bool isReservedWord(string token)
         {
             return reservedWords.Match(token).Success;
         }
         /// <summary>
-        /// 
+        /// Checks if the token is a comment
         /// </summary>
         /// <param name="token"></param>
-        /// <returns></returns>
+        /// <returns>true or false</returns>
         static bool isComment(string token)
         {
             return false;
         }
         /// <summary>
-        /// 
+        /// Checks if the token is a separator
         /// </summary>
         /// <param name="token"></param>
-        /// <returns></returns>
+        /// <returns>true or false</returns>
         static bool isSeparator(string token) {
             return separators1.Match(token).Success|| separators2.Match(token).Success;
         }
         /// <summary>
-        /// 
+        /// Checks if the token is an operator
         /// </summary>
         /// <param name="token"></param>
-        /// <returns></returns>
+        /// <returns>true or false</returns>
         static bool isOperator(string token)
         {
             return operators.Match(token).Success;
