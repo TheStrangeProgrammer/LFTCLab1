@@ -40,9 +40,9 @@ namespace LFTCLab4
                     symbol=symbols.Find((symbol) => symbol.symbolName == symbolName);
                 }
             }
-            State from;
-            State to;
-            Symbol symbol;
+            public State from;
+            public State to;
+            public Symbol symbol;
             public override string ToString()
             {
                 return from.ToString() + "-" + symbol.ToString() + "->" + to.ToString() + "\n";
@@ -186,7 +186,9 @@ namespace LFTCLab4
         {
             string sequence = Console.ReadLine();
             State currentState = initialState;
-
+            
         }
+       
+        
     }
 }
