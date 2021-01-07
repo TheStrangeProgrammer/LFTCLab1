@@ -1,0 +1,484 @@
+Nonterminals useless in grammar
+
+   VARIABLE_N_ARRAY
+   VARIABLE_N_ARRAY_COUNTER
+   COMPLEX_STATEMENT
+   EXPRESSION
+   EXPRESSION_COUNTER
+   PLUSMINUS
+   TERM
+   TERM_COUNTER
+   TIMESDIV
+   FACTOR
+   IO
+   IF_STATEMENT
+   ELSE_IF_PART
+   ELSE_PART
+   WHILE_STATEMENT
+   FOR_STATEMENT
+   CONDITION
+   RELATION
+
+
+Terminals unused in grammar
+
+   BEGINN
+   CONST
+   DO
+   ELSE
+   END
+   IF
+   PRINT
+   READ
+   THEN
+   VAR
+   WHILE
+   CONST_INT
+   CONST_REAL
+   CONST_CAR
+   CONST_SIR
+   CHAR
+   INTEGER
+   REAL
+   ATRIB
+   NE
+   LE
+   GE
+   '+'
+   '-'
+   '*'
+   '/'
+   MOD
+   DIV
+   OR
+   AND
+   NOT
+   "["
+   "]"
+   "+"
+   "-"
+   "*"
+   "/"
+   "input"
+   "output"
+   "if"
+   "else-if"
+   "else"
+   "while"
+   "for"
+   "<"
+   "<="
+   "=="
+   "!="
+   ">="
+   ">"
+
+
+Rules useless in grammar
+
+   16 VARIABLE_TO_LIST: VARIABLE_N_ARRAY
+
+   17 VARIABLE_N_ARRAY: VARIABLE VARIABLE_N_ARRAY_COUNTER
+
+   18 VARIABLE_N_ARRAY_COUNTER: "[" EXPRESSION "]"
+   19                         | "[" EXPRESSION "]" VARIABLE_N_ARRAY_COUNTER
+
+   20 STATEMENT: COMPLEX_STATEMENT
+
+   21 COMPLEX_STATEMENT: IF_STATEMENT
+   22                  | WHILE_STATEMENT
+
+   23 ASSIGN_STATEMENT: EXPRESSION
+
+   24 EXPRESSION: EXPRESSION_COUNTER TERM
+
+   25 EXPRESSION_COUNTER: EXPRESSION PLUSMINUS
+   26                   | EXPRESSION_COUNTER EXPRESSION PLUSMINUS
+
+   27 PLUSMINUS: "+"
+   28          | "-"
+
+   29 TERM: TERM_COUNTER FACTOR
+
+   30 TERM_COUNTER: TERM TIMESDIV
+   31             | TERM TIMESDIV TERM_COUNTER
+
+   32 TIMESDIV: "*"
+   33         | "/"
+
+   34 FACTOR: "(" EXPRESSION ")"
+   35       | INTEGER
+   36       | IDENTIFIER
+
+   37 IO: "input"
+   38   | "output"
+
+   39 IF_STATEMENT: "if" "(" CONDITION ")" COMPOUND_STATEMENT
+   40             | "if" "(" CONDITION ")" COMPOUND_STATEMENT ELSE_PART
+   41             | "if" "(" CONDITION ")" COMPOUND_STATEMENT ELSE_IF_PART ELSE_PART
+
+   42 ELSE_IF_PART: "else-if" CONDITION COMPOUND_STATEMENT
+
+   43 ELSE_PART: "else" COMPOUND_STATEMENT
+
+   44 WHILE_STATEMENT: "while" "(" CONDITION ")" COMPOUND_STATEMENT
+
+   45 FOR_STATEMENT: "for" "(" SIMPLE_STATEMENT ";" CONDITION ";" SIMPLE_STATEMENT ")" COMPOUND_STATEMENT
+
+   46 CONDITION: EXPRESSION RELATION EXPRESSION
+
+   47 RELATION: "<"
+   48         | "<="
+   49         | "=="
+   50         | "!="
+   51         | ">="
+   52         | ">"
+
+
+Grammar
+
+    0 $accept: PROGRAM $end
+
+    1 PROGRAM: COMPOUND_STATEMENT
+
+    2 VARIABLE_DECLARATION_STATEMENT: "let" VARIABLE_LIST
+
+    3 VARIABLE_LIST: VARIABLE_TO_LIST
+    4              | VARIABLE_TO_LIST "," VARIABLE_LIST
+
+    5 VARIABLE_TO_LIST: VARIABLE
+
+    6 VARIABLE: IDENTIFIER
+
+    7 COMPOUND_STATEMENT: "{" STATEMENT_LIST "}"
+
+    8 STATEMENT_LIST: STATEMENT ";"
+    9               | STATEMENT ";" STATEMENT_LIST
+
+   10 STATEMENT: SIMPLE_STATEMENT
+
+   11 SIMPLE_STATEMENT: ASSIGN_STATEMENT
+   12                 | IO_STATEMENT
+   13                 | VARIABLE_DECLARATION_STATEMENT
+
+   14 ASSIGN_STATEMENT: IDENTIFIER "=" IDENTIFIER
+
+   15 IO_STATEMENT: "(" IDENTIFIER ")"
+
+
+Terminals, with rules where they appear
+
+$end (0) 0
+'*' (42)
+'+' (43)
+'-' (45)
+'/' (47)
+error (256)
+BEGINN (258)
+CONST (259)
+DO (260)
+ELSE (261)
+END (262)
+IF (263)
+PRINT (264)
+READ (265)
+THEN (266)
+VAR (267)
+WHILE (268)
+IDENTIFIER (269) 6 14 15
+CONST_INT (270)
+CONST_REAL (271)
+CONST_CAR (272)
+CONST_SIR (273)
+CHAR (274)
+INTEGER (275)
+REAL (276)
+ATRIB (277)
+NE (278)
+LE (279)
+GE (280)
+MOD (281)
+DIV (282)
+OR (283)
+AND (284)
+NOT (285)
+"let" (286) 2
+"," (287) 4
+"[" (288)
+"]" (289)
+"{" (290) 7
+"}" (291) 7
+";" (292) 8 9
+"=" (293) 14
+"+" (294)
+"-" (295)
+"*" (296)
+"/" (297)
+"(" (298) 15
+")" (299) 15
+"input" (300)
+"output" (301)
+"if" (302)
+"else-if" (303)
+"else" (304)
+"while" (305)
+"for" (306)
+"<" (307)
+"<=" (308)
+"==" (309)
+"!=" (310)
+">=" (311)
+">" (312)
+
+
+Nonterminals, with rules where they appear
+
+$accept (62)
+    on left: 0
+PROGRAM (63)
+    on left: 1, on right: 0
+VARIABLE_DECLARATION_STATEMENT (64)
+    on left: 2, on right: 13
+VARIABLE_LIST (65)
+    on left: 3 4, on right: 2 4
+VARIABLE_TO_LIST (66)
+    on left: 5, on right: 3 4
+VARIABLE (67)
+    on left: 6, on right: 5
+COMPOUND_STATEMENT (68)
+    on left: 7, on right: 1
+STATEMENT_LIST (69)
+    on left: 8 9, on right: 7 9
+STATEMENT (70)
+    on left: 10, on right: 8 9
+SIMPLE_STATEMENT (71)
+    on left: 11 12 13, on right: 10
+ASSIGN_STATEMENT (72)
+    on left: 14, on right: 11
+IO_STATEMENT (73)
+    on left: 15, on right: 12
+
+
+state 0
+
+    0 $accept: . PROGRAM $end
+
+    "{"  shift, and go to state 1
+
+    PROGRAM             go to state 2
+    COMPOUND_STATEMENT  go to state 3
+
+
+state 1
+
+    7 COMPOUND_STATEMENT: "{" . STATEMENT_LIST "}"
+
+    IDENTIFIER  shift, and go to state 4
+    "let"       shift, and go to state 5
+    "("         shift, and go to state 6
+
+    VARIABLE_DECLARATION_STATEMENT  go to state 7
+    STATEMENT_LIST                  go to state 8
+    STATEMENT                       go to state 9
+    SIMPLE_STATEMENT                go to state 10
+    ASSIGN_STATEMENT                go to state 11
+    IO_STATEMENT                    go to state 12
+
+
+state 2
+
+    0 $accept: PROGRAM . $end
+
+    $end  shift, and go to state 13
+
+
+state 3
+
+    1 PROGRAM: COMPOUND_STATEMENT .
+
+    $default  reduce using rule 1 (PROGRAM)
+
+
+state 4
+
+   14 ASSIGN_STATEMENT: IDENTIFIER . "=" IDENTIFIER
+
+    "="  shift, and go to state 14
+
+
+state 5
+
+    2 VARIABLE_DECLARATION_STATEMENT: "let" . VARIABLE_LIST
+
+    IDENTIFIER  shift, and go to state 15
+
+    VARIABLE_LIST     go to state 16
+    VARIABLE_TO_LIST  go to state 17
+    VARIABLE          go to state 18
+
+
+state 6
+
+   15 IO_STATEMENT: "(" . IDENTIFIER ")"
+
+    IDENTIFIER  shift, and go to state 19
+
+
+state 7
+
+   13 SIMPLE_STATEMENT: VARIABLE_DECLARATION_STATEMENT .
+
+    $default  reduce using rule 13 (SIMPLE_STATEMENT)
+
+
+state 8
+
+    7 COMPOUND_STATEMENT: "{" STATEMENT_LIST . "}"
+
+    "}"  shift, and go to state 20
+
+
+state 9
+
+    8 STATEMENT_LIST: STATEMENT . ";"
+    9               | STATEMENT . ";" STATEMENT_LIST
+
+    ";"  shift, and go to state 21
+
+
+state 10
+
+   10 STATEMENT: SIMPLE_STATEMENT .
+
+    $default  reduce using rule 10 (STATEMENT)
+
+
+state 11
+
+   11 SIMPLE_STATEMENT: ASSIGN_STATEMENT .
+
+    $default  reduce using rule 11 (SIMPLE_STATEMENT)
+
+
+state 12
+
+   12 SIMPLE_STATEMENT: IO_STATEMENT .
+
+    $default  reduce using rule 12 (SIMPLE_STATEMENT)
+
+
+state 13
+
+    0 $accept: PROGRAM $end .
+
+    $default  accept
+
+
+state 14
+
+   14 ASSIGN_STATEMENT: IDENTIFIER "=" . IDENTIFIER
+
+    IDENTIFIER  shift, and go to state 22
+
+
+state 15
+
+    6 VARIABLE: IDENTIFIER .
+
+    $default  reduce using rule 6 (VARIABLE)
+
+
+state 16
+
+    2 VARIABLE_DECLARATION_STATEMENT: "let" VARIABLE_LIST .
+
+    $default  reduce using rule 2 (VARIABLE_DECLARATION_STATEMENT)
+
+
+state 17
+
+    3 VARIABLE_LIST: VARIABLE_TO_LIST .
+    4              | VARIABLE_TO_LIST . "," VARIABLE_LIST
+
+    ","  shift, and go to state 23
+
+    $default  reduce using rule 3 (VARIABLE_LIST)
+
+
+state 18
+
+    5 VARIABLE_TO_LIST: VARIABLE .
+
+    $default  reduce using rule 5 (VARIABLE_TO_LIST)
+
+
+state 19
+
+   15 IO_STATEMENT: "(" IDENTIFIER . ")"
+
+    ")"  shift, and go to state 24
+
+
+state 20
+
+    7 COMPOUND_STATEMENT: "{" STATEMENT_LIST "}" .
+
+    $default  reduce using rule 7 (COMPOUND_STATEMENT)
+
+
+state 21
+
+    8 STATEMENT_LIST: STATEMENT ";" .
+    9               | STATEMENT ";" . STATEMENT_LIST
+
+    IDENTIFIER  shift, and go to state 4
+    "let"       shift, and go to state 5
+    "("         shift, and go to state 6
+
+    $default  reduce using rule 8 (STATEMENT_LIST)
+
+    VARIABLE_DECLARATION_STATEMENT  go to state 7
+    STATEMENT_LIST                  go to state 25
+    STATEMENT                       go to state 9
+    SIMPLE_STATEMENT                go to state 10
+    ASSIGN_STATEMENT                go to state 11
+    IO_STATEMENT                    go to state 12
+
+
+state 22
+
+   14 ASSIGN_STATEMENT: IDENTIFIER "=" IDENTIFIER .
+
+    $default  reduce using rule 14 (ASSIGN_STATEMENT)
+
+
+state 23
+
+    4 VARIABLE_LIST: VARIABLE_TO_LIST "," . VARIABLE_LIST
+
+    IDENTIFIER  shift, and go to state 15
+
+    VARIABLE_LIST     go to state 26
+    VARIABLE_TO_LIST  go to state 17
+    VARIABLE          go to state 18
+
+
+state 24
+
+   15 IO_STATEMENT: "(" IDENTIFIER ")" .
+
+    $default  reduce using rule 15 (IO_STATEMENT)
+
+
+state 25
+
+    9 STATEMENT_LIST: STATEMENT ";" STATEMENT_LIST .
+
+    $default  reduce using rule 9 (STATEMENT_LIST)
+
+
+state 26
+
+    4 VARIABLE_LIST: VARIABLE_TO_LIST "," VARIABLE_LIST .
+
+    $default  reduce using rule 4 (VARIABLE_LIST)

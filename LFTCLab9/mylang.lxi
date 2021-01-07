@@ -1,0 +1,42 @@
+LETTER 					[A-Za-z_]
+DIGIT 					[0-9]
+NON_ZERO_DIGIT			[1-9]
+
+
+
+
+CHARACTER				\'({LETTER}|{DIGIT})\'
+STRING					\"({LETTER}|{DIGIT})*\"
+INTEGER 				0|["+"|"-"]{NON_ZERO_DIGIT}{DIGIT}*
+BOOLEAN					("true"|"false")*
+IDENTIFIER 	    		{LETTER}({LETTER}|{DIGIT})*
+OPERATORS				(\+|\*|-|\/|%|==|<=|>=|=|<|>|\|\||&&|!)
+%%
+
+{INTEGER}    {
+		       printf( "An integer: %s (%d)\n", yytext,
+			       atoi( yytext ) );
+		    }
+{IDENTIFIER}	   printf( "An identifier: %s\n", yytext );
+{CHARACTER}	       printf( "A character: %s\n", yytext );
+{STRING}	       printf( "A string: %s\n", yytext );
+{BOOLEAN}	       printf( "A boolean: %s\n", yytext );
+{OPERATORS}	       printf( "An operator: %s\n", yytext );
+
+%%
+
+main( argc, argv )
+int argc;
+char **argv;
+    {
+        ++argv, --argc;	/* skip over program name */
+        if ( argc > 0 )
+            yyin = fopen( argv[0], "r" );
+        else
+            yyin = stdin;
+    yylex();
+    }
+
+#ifndef yywrap
+   yywrap() { return 1; }
+#endif
